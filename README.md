@@ -1,2 +1,13 @@
 # ai-agent-fastapi-service
-AI-agent-generated FastAPI workflow service with CRUD endpoints, validation, authentication, rate limiting, and tests.
+
+FastAPI microservice scaffold for AI-agent-generated workflow and task APIs.
+
+## Development
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -e '.[dev]'
+uvicorn app.main:app --reload
+pytest
+```
