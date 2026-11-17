@@ -1,17 +1,21 @@
+import os
 from collections import defaultdict
 from time import monotonic
+
 import jwt
 from fastapi import Request
 from starlette.middleware.base import BaseHTTPMiddleware
 from starlette.responses import JSONResponse
 
-SECRET = "development-only-secret"
+# Defina JWT_SECRET (32+ bytes) fora do ambiente de desenvolvimento.
+SECRET = os.getenv("JWT_SECRET", "development-only-secret-change-me-in-prod")
 PUBLIC_PATHS = {"/health", "/docs", "/openapi.json", "/redoc"}
 
 class RateLimitMiddleware(BaseHTTPMiddleware):
-    def __init__(self, app, limit: int = 60, window: int = 60):
+    def __init__(self, app, limit: int | None = None, window: int = 60):
         super().__init__(app)
-        self.limit, self.window = limit, window
+        self.limit = limit if limit is not None else int(os.getenv("RATE_LIMIT_PER_MINUTE", "60"))
+        self.window = window
         self.requests = defaultdict(list)
 
     async def dispatch(self, request: Request, call_next):
