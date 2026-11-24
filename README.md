@@ -130,6 +130,10 @@ mínima de 90%, o build da imagem Docker e um smoke test do container.
   de identidade.
 - Sem escopos ou permissões por recurso: qualquer token válido acessa todos os workflows.
 
+## Histórico de desenvolvimento
+
+Projeto desenvolvido localmente entre 23/08/2026 e 17/11/2026. O histórico de commits foi criado depois, e as datas dos commits foram ajustadas para corresponder ao período em que o trabalho foi realmente feito.
+
 ## Licença
 
 MIT.
